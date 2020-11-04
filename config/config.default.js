@@ -25,11 +25,7 @@ module.exports = appInfo => {
   config.io = {
     namespace: {
       '/': {
-        connectionMiddleware: [],
-        packetMiddleware: ['filter'],
-      },
-      '/chat': {
-        connectionMiddleware: ['auth'],
+        connectionMiddleware: ['ssh'],
         packetMiddleware: [],
       },
     },

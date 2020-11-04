@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Layout, Menu } from 'antd'
+import { Layout, Menu, Button } from 'antd'
 import {
   AppstoreOutlined,
   BarChartOutlined,
@@ -13,11 +13,16 @@ import {
 } from '@ant-design/icons'
 import { connect } from 'umi'
 import axios from 'axios'
+import '../global.less'
+import 'xterm/css/xterm.css'
 
 const { Header, Content, Footer, Sider } = Layout
 
 const AppRoot = props => {
   const [collapsed, setCollapsed] = useState(false)
+  if (props.history.location.pathname.startsWith('/ssh')) {
+    return <>{props.children}</>
+  }
   return (
     <Layout>
       <Sider trigger={null} collapsible collapsed={collapsed}>

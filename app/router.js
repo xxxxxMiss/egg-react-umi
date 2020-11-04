@@ -11,9 +11,5 @@ module.exports = app => {
   router.get('/api/fetchSnapshot', controller.home.fetchSnapshot)
   router.get('*', controller.home.index)
 
-   // app.io.of('/')
-  io.route('chat', app.io.controller.chat.index);
-
-  // app.io.of('/chat')
-  io.of('/chat').route('chat', app.io.controller.chat.index);
+  io.of('/').route('msg', app.io.controller.ssh.data);
 }

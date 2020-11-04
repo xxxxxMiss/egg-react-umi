@@ -5,7 +5,6 @@ class HomeController extends Controller {
     const { ctx, app } = this
     global.host = `${ctx.request.protocol}://${ctx.request.host}`
     global.href = ctx.request.href
-    console.log('============11111: ', ctx.helper.parseCookie(ctx))
     global._cookies = ctx.helper.parseCookie(ctx)
     global._navigatorLang = ctx.helper.parseNavLang(ctx)
     /**
@@ -39,7 +38,6 @@ class HomeController extends Controller {
 
   async user() {
     const { ctx } = this
-    console.log('---client query: ', ctx.query)
     ctx.body = {
       errorCode: 0,
       result: {
@@ -50,7 +48,6 @@ class HomeController extends Controller {
   }
   modifyName() {
     const { ctx } = this
-    ctx.logger.info('--client post data---', ctx.body)
     ctx.body = {
       errorCode: 0,
       result: true,

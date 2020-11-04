@@ -1,12 +1,15 @@
 import { defineConfig } from 'umi'
+import path from 'path'
 
 const env = process.env.NODE_ENV
-const path = env === 'development' ? 'http://127.0.0.1:8000/' : '/public/'
+const publicPath = env === 'development' ? 'http://127.0.0.1:8000/' : '/public/'
+
+const getPath = (...paths) => path.join(process.cwd(), `web/${paths.join('/')}`)
 
 export default defineConfig({
   extraBabelPlugins: ['babel-plugin-auto'],
   ssr: {
-    devServerRender: true,
+    devServerRender: false,
     forceInitial: true,
   },
   locale: {
@@ -24,21 +27,25 @@ export default defineConfig({
     type: 'none',
   },
   outputPath: '../public/',
-  publicPath: path,
-  routes: [
-    {
-      path: '/',
-      component: '@/layouts/index',
-      routes: [
-        {
-          path: '/home',
-          component: '@/pages/index',
-        },
-        {
-          path: '/user',
-          component: '@/pages/user/index',
-        },
-      ],
-    },
-  ],
+  publicPath,
+  alias: {
+    'pages': getPath('pages'),
+    'assets': getPath('assets')
+  },
+  //routes: [
+    //{
+      //path: '/',
+      //component: '@/layouts/index',
+      //routes: [
+        //{
+          //path: '/home',
+          //component: '@/pages/index',
+        //},
+        //{
+          //path: '/user',
+          //component: '@/pages/user/index',
+        //},
+      //],
+    //},
+  //],
 })

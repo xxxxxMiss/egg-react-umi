@@ -1,11 +1,11 @@
 const Controller = require('egg').Controller
 
 class ChatController extends Controller {
-  async index() {
+  async msg() {
     const message = this.ctx.args[0]
-    console.log('chat :', message + ' : ' + process.pid)
+    console.log(this.ctx.args, '------------args')
     const say = await this.ctx.service.user.say()
-    this.ctx.socket.emit('res', say)
+    this.ctx.socket.emit('data', say)
   }
 }
 

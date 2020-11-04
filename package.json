@@ -18,6 +18,7 @@
   "dependencies": {
     "@umijs/preset-react": "^1.5.17",
     "axios": "^0.19.2",
+    "bufferutil": "^4.0.1",
     "classnames": "^2.2.6",
     "cross-env": "^5.2.0",
     "egg": "^2.12.0",
@@ -27,9 +28,13 @@
     "prop-types": "^15.6.2",
     "qs": "^6.7.0",
     "socket.io-client": "^2.3.0",
+    "ssh2": "^0.8.9",
     "swr": "^0.2.3",
-    "umi": "^3.2.9",
-    "url": "^0.11.0"
+    "umi": "^3.2.24",
+    "url": "^0.11.0",
+    "utf-8-validate": "^5.0.2",
+    "xterm": "^4.9.0",
+    "xterm-addon-fit": "^0.4.0"
   },
   "bin": {
     "umi": "./node_modules/.bin/umi"

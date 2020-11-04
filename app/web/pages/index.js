@@ -53,6 +53,7 @@ const Home = props => {
       <Button onClick={modifyName}>fetch data</Button>
       <Button onClick={test}>hello world and data</Button>
       <Button onClick={gotoUserPage}>go to user page</Button>
+      <Button onClick={() => history.push('/chat')}>chat</Button>
       <ul>
         {list.map(item => (
           <li key={item.id}>{item.name}</li>
@@ -62,6 +63,7 @@ const Home = props => {
   )
 }
 Home.getInitialProps = async ({ store, isServer, history, match, route }) => {
+  return {}
   // console.log(ctx);
   if (!isServer) {
     return
