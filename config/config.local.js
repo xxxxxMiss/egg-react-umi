@@ -13,8 +13,8 @@ module.exports = appInfo => {
         APP_ROOT: process.cwd() + '/app/web',
         BROWSER: 'none',
         ESLINT: 'none',
-        SOCKET_SERVER: 'http://127.0.0.1:8001',
-        PUBLIC_PATH: 'http://127.0.0.1:8001',
+        SOCKET_SERVER: 'http://127.0.0.1:8000',
+        PUBLIC_PATH: 'http://127.0.0.1:8000',
       },
     },
   }

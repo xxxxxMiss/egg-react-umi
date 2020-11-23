@@ -11,5 +11,6 @@ module.exports = app => {
   router.get('/api/fetchSnapshot', controller.home.fetchSnapshot)
   router.get('*', controller.home.index)
 
-  io.of('/').route('msg', app.io.controller.ssh.data);
+  // io.of('/').route('msg', app.io.controller.ssh.data)
+  io.of('/theme').route('styleChange', app.io.controller.theme.compileStyle)
 }

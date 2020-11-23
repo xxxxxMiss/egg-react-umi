@@ -25,9 +25,10 @@ module.exports = appInfo => {
   config.io = {
     namespace: {
       '/': {
-        connectionMiddleware: ['ssh'],
-        packetMiddleware: [],
+        // connectionMiddleware: ['ssh'],
+        // packetMiddleware: [],
       },
+      '/theme': {},
     },
   }
 
