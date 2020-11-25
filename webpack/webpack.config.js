@@ -1,9 +1,9 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // webpack.config.js
-module.exports = {
+const webpackConfig = {
   mode: 'development',
-  entry: path.join(process.cwd(), 'app/webpack/index.less'),
+  entry: path.join(process.cwd(), 'webpack/index.less'),
   output: {
     filename: 'bundle.js',
     path: '/',
@@ -13,6 +13,12 @@ module.exports = {
       filename: '/bundle.css',
     }),
   ],
+  resolve: {
+    symlinks: false,
+  },
+  cache: {
+    type: 'memory',
+  },
   module: {
     rules: [
       {
@@ -46,3 +52,32 @@ module.exports = {
   },
   // ...other config
 }
+
+const webpack = require('webpack')
+const { createFsFromVolume, Volume } = require('memfs')
+const mfs = createFsFromVolume(new Volume())
+const compiler = webpack(webpackConfig)
+compiler.outputFileSystem = mfs
+compiler.watch(
+  {
+    aggregateTimeout: 600,
+    ignored: 'node_modules/**',
+  },
+  (err, stats) => {
+    if (err || stats.hasErrors()) {
+      console.log(
+        err ||
+          stats.toString({
+            colors: true,
+          }),
+      )
+      return
+    }
+    console.log(
+      stats.toString({
+        colors: true,
+      }),
+    )
+    // const content = mfs.readFileSync('/bundle.css', 'utf8')
+  },
+)
