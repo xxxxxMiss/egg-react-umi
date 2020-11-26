@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Drawer, Divider } from 'antd'
+import { Drawer, Divider, Button } from 'antd'
 import ButtonTheme from './button'
 import FormTheme from './form'
 import MenuTheme from './menu'
@@ -11,12 +11,16 @@ import InputTheme from './input'
 import io from 'socket.io-client'
 import ReactJson from 'react-json-view'
 import { getThemeVariables } from 'antd/dist/theme'
+import { COMPONENTS, getCategorys } from 'assets/js/utils'
+import styles from './index.less'
 
 export default function Theme() {
   const ioRef = useRef(null)
   const styleTagRef = useRef(null)
+  const categoryRef = useRef(null)
   const [vars, setVars] = useState({})
   const [drawerVisible, setDrawerVisible] = useState(true)
+  const [filterVisible, setFilterVisible] = useState(false)
   const [jsonObject, setJsonObject] = useState(getThemeVariables())
 
   useEffect(() => {
@@ -52,6 +56,10 @@ export default function Theme() {
     socket.emit('styleChange', vars)
   }, [vars])
 
+  useEffect(() => {
+    categoryRef.current = getCategorys(jsonObject)
+  }, [])
+
   const targetScrollIntoView = name => {
     const prefix = name.split('-')[0]
     const target = document.querySelector(`#theme-${prefix}`)
@@ -75,6 +83,15 @@ export default function Theme() {
 
   return (
     <div>
+      <div className={styles.actions}>
+        <Button onClick={() => setFilterVisible(true)}>筛选</Button>
+        <Button href="/download?type=js" download="theme.js">
+          下载JS
+        </Button>
+        <Button href="/download?type=css" download="theme.css">
+          下载完整CSS
+        </Button>
+      </div>
       <ReactJson
         src={jsonObject}
         onEdit={onJsonEdit}
@@ -83,6 +100,27 @@ export default function Theme() {
         displayObjectSize={false}
         theme="monokai"
       />
+      <Drawer
+        placement="right"
+        placement="right"
+        visible={filterVisible}
+        mask={false}
+        width={300}
+        onClose={() => setFilterVisible(false)}
+        className={styles.filter}
+      >
+        {Object.keys(COMPONENTS).map(key => (
+          <Button
+            key={key}
+            onClick={() => {
+              setJsonObject(categoryRef.current.get(key))
+              setFilterVisible(false)
+            }}
+          >
+            {COMPONENTS[key]}
+          </Button>
+        ))}
+      </Drawer>
       <Drawer
         width={540}
         placement="left"

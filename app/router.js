@@ -9,6 +9,7 @@ module.exports = app => {
   router.post('/api/modify-name', controller.home.modifyName)
   router.get('/api/getlist', controller.home.getList)
   router.get('/api/fetchSnapshot', controller.home.fetchSnapshot)
+  router.get('/download', controller.theme.download)
   router.get('*', controller.home.index)
 
   // io.of('/').route('msg', app.io.controller.ssh.data)

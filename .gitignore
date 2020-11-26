@@ -15,9 +15,9 @@
 
 # umi
 /.env.local
-.umi/
+**/.umi/
 app/public/
-app/web/.umi/
+app/data/
 run/
 logs/
 .idea/
