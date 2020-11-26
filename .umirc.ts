@@ -4,5 +4,4 @@ export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
-  extraBabelPlugins: ['babel-plugin-auto'],
 })

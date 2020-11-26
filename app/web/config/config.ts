@@ -7,7 +7,6 @@ const publicPath = env === 'development' ? 'http://127.0.0.1:8000/' : '/public/'
 const getPath = (...paths) => path.join(process.cwd(), `app/web/${paths.join('/')}`)
 
 export default defineConfig({
-  extraBabelPlugins: ['babel-plugin-auto'],
   ssr: {
     devServerRender: false,
     forceInitial: true,
