@@ -10,6 +10,22 @@
     console.log('---template: hello', ctx)
   </script>
   <!-- this is my custom html template -->
-  <div id="root"></div>
+  <div id="root">
+    <script>
+      window.onerror = (message, source, line, column, error) => {
+        const errorObj = {
+          message,
+          source,
+          line,
+          column,
+          stack: error.stack
+        }
+        const xhr = new window.XMLHttpRequest()
+        xhr.open('post', 'http://localhost:3000/error/report')
+        xhr.setRequestHeader('Content-Type', 'application/json')
+        xhr.send(JSON.stringify(errorObj))
+      }
+    </script>
+  </div>
 </body>
 </html>

@@ -13,6 +13,10 @@ import ReactJson from 'react-json-view'
 import { getThemeVariables } from 'antd/dist/theme'
 import { COMPONENTS, getCategorys } from 'assets/js/utils'
 import styles from './index.less'
+import SwitchTheme from './switch'
+import SelectTheme from './select'
+import StepsTheme from './steps'
+import TableTheme from './table'
 
 export default function Theme() {
   const ioRef = useRef(null)
@@ -113,7 +117,11 @@ export default function Theme() {
           <Button
             key={key}
             onClick={() => {
-              setJsonObject(categoryRef.current.get(key))
+              let jsonObj = categoryRef.current.get(key)
+              if (key === 'all') {
+                jsonObj = getThemeVariables()
+              }
+              setJsonObject(jsonObj)
               setFilterVisible(false)
             }}
           >
@@ -144,6 +152,14 @@ export default function Theme() {
         <TransferTheme />
         <Divider />
         <InputTheme />
+        <Divider />
+        <SwitchTheme />
+        <Divider />
+        <SelectTheme />
+        <Divider />
+        <StepsTheme />
+        <Divider />
+        <TableTheme />
       </Drawer>
     </div>
   )

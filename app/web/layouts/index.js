@@ -24,7 +24,7 @@ const AppRoot = props => {
     return <>{props.children}</>
   }
   return (
-    <Layout style={{ paddingLeft: 580 }}>
+    <Layout style={{ paddingLeft: 580, height: '100%' }}>
       <Layout className="site-layout">
         <Content
           className="site-layout-background"
